@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Depot52</title>
+    <title>Pragprog Books Online</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class='<%= controller.controller_name %>'>
-    <%= yield %>
+    <div id="banner">
+      <%= image_tag 'logo.svg',alt: 'The Pracmatic Bookshelf'%>
+      <span class="title"><%=@page_title %></span>
+    </div>
+    <div id="columns">
+      <div id="side">
+        <ul>
+          <li>
+            <a href="http://....">Home</a>
+          </li>
+          <li>
+            <a href="http://..../faq">Questions</a>
+          </li>
+          <li>
+            <a href="http://..../news">News</a>
+          </li>
+          <li>
+            <a href="http://..../contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div id="main">
+        <%= yield %>
+      </div>
+    </div>
   </body>
+  <%= console %>
 </html>
