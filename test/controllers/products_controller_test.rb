@@ -17,12 +17,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     #C5
     assert_select 'h1', 'Products'
 
-    # assert_select "ol" do |elements|
-    #   elements.each do |element|
-    #     assert_select element, "li", 4
-    #   end
-    # end
-
     assert_select "tr>td.list_actions" do |listas|
       assert_equal 3, listas.size
       listas.each do |lista|
@@ -34,8 +28,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
-    # assert_select '.list_actions a', {count: 3, :text=>/Show|Edsit|Desstroy/}
-
 
   test "should get new" do
     get new_product_url
@@ -63,6 +55,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should update product" do
     patch product_url(@product), params: { product: @update }
     assert_redirected_to product_url(@product)
+  end
+
+  test "can't delete product in cart" do
+    assert_difference('Product.count', 0) do
+      delete product_url(product(:two))
+    end
+    assert_redirected_to products_urlsss
   end
 
   test "should destroy product" do
