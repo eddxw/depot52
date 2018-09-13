@@ -14,7 +14,28 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get products_url
     assert_response :success
+    #C5
+    assert_select 'h1', 'Products'
+
+    # assert_select "ol" do |elements|
+    #   elements.each do |element|
+    #     assert_select element, "li", 4
+    #   end
+    # end
+
+    assert_select "tr>td.list_actions" do |listas|
+      assert_equal 3, listas.size
+      listas.each do |lista|
+        assert_select lista, 'a' do |eles|
+          eles.each do |ele|
+            assert_match /Show|Edit|Destroy/, ele.text
+          end
+        end
+      end
+    end
   end
+    # assert_select '.list_actions a', {count: 3, :text=>/Show|Edsit|Desstroy/}
+
 
   test "should get new" do
     get new_product_url
