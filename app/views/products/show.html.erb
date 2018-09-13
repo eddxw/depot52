@@ -7,17 +7,19 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @product.description %>
+  <%= @product.description.html_safe %>
 </p>
 
 <p>
   <strong>Image url:</strong>
   <%= @product.image_url %>
 </p>
-
+<p>
+  <%= image_tag @product.image_url %>
+</p>
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= number_to_currency @product.price %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
