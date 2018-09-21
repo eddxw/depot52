@@ -3,9 +3,8 @@
 <h3><%= pluralize(session[:counter], "visit") if session[:counter] > 5 %></h3>
 <% cache @products do%>
   <% @products.each do |product| %>
-    <% cache product do%>
-    <%= content_tag :div, data: {product_id: product.id},class: 'x'  do %>
-      <div class="entry">
+    <% cache product do %>
+      <%= content_tag :div, data: {product_id: product.id}, class: 'entry' do %>
         <%= link_to line_items_path(product_id: product), method: :post,remote: true do %>
           <%= image_tag(product.image_url) %>
         <% end %>
@@ -15,7 +14,6 @@
           <span class="price"><%= number_to_currency(product.price, locale: 'es-MX'.to_sym) %></span>
           <%= button_to 'Add to Cart', line_items_path(product_id: product), remote: true %>
         </div>
-      </div>
       <% end %>
     <% end %>
   <% end %>

@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  has_many :line_items
+  has_many :orders, through: :line_items
+  before_destroy :ensure_not_refenced_by_any_item
   validates :title, :description, :image_url, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :title, uniqueness: true, length: { minimum: 10 }
@@ -6,8 +9,6 @@ class Product < ApplicationRecord
     with: /\.(gif|jpg|png)\Z/i,
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
-  has_many :line_items
-  before_destroy :ensure_not_refenced_by_any_item
 
   private
 

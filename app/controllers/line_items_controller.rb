@@ -84,8 +84,9 @@ class LineItemsController < ApplicationController
   end
 
   def set_cart_line_item
-    @cart = Cart.find(session[:cart_id])
-    @line_item = @cart.line_items.find_by_id(params[:id])
+    @line_item = LineItem.find(params[:id])
+    @cart = @line_item.cart
+    # @line_item = @cart.line_items.find_by_id(params[:id])
   end
 
   def decrement_line_item_response
